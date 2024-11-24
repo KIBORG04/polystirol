@@ -1,5 +1,10 @@
 import numpy as np
 
-foo = [1, 3, 4]
+def test2(a, b):
+    print(a, b, sep="|")
 
-print(np.linspace(0, 10, 101))
+def test(*args):
+    test2(*args)
+
+np.array([1])[0]
+test("aboba", "test")
