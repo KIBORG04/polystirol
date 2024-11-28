@@ -1,10 +1,8 @@
-import numpy as np
+test = [
+    [1, 2, 3],
+    [3, 4, 5],
+    [6, 7, 8],
+    [11, 12,13]
+]
 
-def test2(a, b):
-    print(a, b, sep="|")
-
-def test(*args):
-    test2(*args)
-
-np.array([1])[0]
-test("aboba", "test")
+print([sub_array[-1] for sub_array in test[2:]])
