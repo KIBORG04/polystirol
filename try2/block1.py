@@ -8,6 +8,10 @@ import scipy.integrate as sci
 def block1(n):
     return kimptAndKfc(n)
 
+class Rolf:
+    y = np.array(())
+    t = np.array(())
+
 def RKSolver(f, time, y0, args):
     t_values = [time[0]]
     y_values = [y0]
@@ -17,30 +21,28 @@ def RKSolver(f, time, y0, args):
     while t < time[1]:
         if t + h > time[1]:  # Корректируем последний шаг, чтобы не превысить t_end
             h = time[1] - t
-        
+
         k1 = h * np.array(f(t, y, *args))
         k2 = h * np.array(f(t + h/2, y + k1/2, *args))
         k3 = h * np.array(f(t + h/2, y + k2/2, *args))
-        k4 = h * np.array(f(t + h, y + k3, k3, *args))
-        
+        k4 = h * np.array(f(t + h, y + k3, *args))
+
         y = y + (k1 + 2*k2 + 2*k3 + k4) / 6
         t = t + h
-        
+
         t_values.append(t)
         y_values.append(y.tolist())
-    return np.array(y_values).T
 
-class Rolf:
-    y = np.array(())
-    t = np.array(())
+    rol = Rolf()
+    rol.y = np.array(y_values).T
+    rol.t = time
+
+    return rol
 
 def kimptAndKfc(n):
     y0 = [0, 0, T0[n]] + [0 for _ in range(FACTIONS)]
     sol = sci.solve_ivp(kimpt_pend, [timeStart, timeEnd], y0, args=(n,), t_eval=time)
     #sol = RKSolver(kimpt_pend, [timeStart, timeEnd], y0, args=#(n,))
-    #rol = Rolf()
-    #rol.y = sol
-    #rol.t = time
     return sol
 
 def kimpt_pend(t, y, n):
