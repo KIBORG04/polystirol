@@ -1,22 +1,22 @@
 import numpy as np
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
-# Пример данных (замени на свои)
-time = np.arange(0, 50, 0.01)  # Время от 0 до 50 с шагом 0.01
-concentration = np.random.rand(len(time)) * np.exp(-((time - 25)**2) / (2 * 10**2))  # Пример концентрации
+# Данные для графика
+x = np.linspace(-10, 10, 100)
+y = np.linspace(-10, 10, 100)
+x, y = np.meshgrid(x, y)
+z = np.sin(np.sqrt(x**2 + y**2))  # Функция для поверхности
 
-print(time, concentration, sep='\n')
+print(z, len(x), len(y))
+# Создание графика
+fig = go.Figure(data=[go.Surface(z=z, x=x, y=y)])
 
-# Связь времени с молекулярной массой (примем линейную зависимость)
-k = 400  # Коэффициент, регулирующий масштаб масс (подбери по данным)
-molecular_weights = time  # Переводим время в молекулярную массу
+# Настройка осей
+fig.update_layout(scene=dict(
+    xaxis_title="X Axis",
+    yaxis_title="Y Axis",
+    zaxis_title="Z Axis"
+))
 
-# Нормируем концентрацию
-concentration /= np.sum(concentration)
-
-# Построение графика ММР
-plt.plot(molecular_weights, concentration)
-plt.title('Результат расчета имитационной модели ММР')
-plt.xlabel('Молекулярная масса')
-plt.ylabel('Концентрация')
-plt.show()
+# Отображение
+#fig.show()
