@@ -587,11 +587,11 @@ def C(b, MM, dP, dMM, N):
         S = 0
         NN = 1
 
-    for j in range(len(b)):
-        if (b[j] > MM[i]) and (b[j] <= MM[i] + dMM):
-            S = S + b[j]
-            NN += 1
-            # print(S)
+        for j in range(len(b)):
+            if (b[j] > MM[i]) and (b[j] <= MM[i] + dMM):
+                S = S + b[j]
+                NN += 1
+                # print(S)
 
     C[i][0] = S / NN
     C[i][1] = NN * dP
