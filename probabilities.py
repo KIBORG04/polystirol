@@ -38,21 +38,6 @@ class GaussianDistributionM0SD1(GaussianDistribution):
     def getParams(self):
         return {"mean": 500, "stdDev": 1000}
 
-class ExponentialDistribution(ProbabilityGenerator):
-    def calculateProbabilityList(self, listLen):
-        lam = self.getLambda()
-        values = [lam*np.exp(-lam*x) for x in range(listLen)]
-        total = np.sum(values)
-        probList = values / total
-        return probList
-
-    def getLambda(self):
-        return 2
-
-class ExponentialDistribution07(ExponentialDistribution):
-    def getLambda(self):
-        return 4
-
 class ParetoDistribution(ProbabilityGenerator):
     def calculateProbabilityList(self, listLen):
         xm, k = self.getParams(listLen)["xm"], self.getParams(listLen)["k"]
@@ -77,8 +62,7 @@ Methods = {
     'linear-decrease': LinearDecrease(),
     'linear-increase': LinearIncrease(),
     'uniform': Uniform(),
-    #'gaussia mean=500 std_dev=1000': GaussianDistributionM0SD1(),
-    'exp lam=0.7': ExponentialDistribution07(),
+    'gaussia mean=500 std_dev=1000': GaussianDistributionM0SD1(),
     'pareto xm=20% k=3': ParetoDistributionXm20K3(),
 }
 
@@ -89,4 +73,14 @@ def GetProbabilities(num, method='linear-decrease'):
 def GetAllMethods():
     return Methods.keys()
 
-#print(GetProbabilities(1000, 'linear-decrease'))
+probbbs = GetProbabilities(100, 'pareto xm=20% k=3')
+print(probbbs)
+
+# probbbs = np.array([0.7, 0.1, 0.05, 0.05, 0.1])
+# print(probbbs)
+# probbbs = np.delete(probbbs, 0)
+# probbbs = probbbs / sum(probbbs)
+# print(probbbs)
+# probbbs = np.delete(probbbs, 3)
+# probbbs = probbbs / sum(probbbs)
+# print(probbbs)
