@@ -1,18 +1,19 @@
-# Пример массива
-numbers = [3, 15, 8, 22, 5]
+from scipy.stats import poisson, norm
+import numpy as np
 
-# Шаги
-steps = 100
+# Параметр λ
+lam = 250
 
-# Номер шага (например, 25-й шаг)
-step_number = 25
+# Диапазон значений
+x = np.arange(0, 1000)  # Замените 20 на нужное максимальное значение
 
-# Вычисление
-min_value = min(numbers)
-max_value = max(numbers)
-step = (max_value - min_value) / steps
+# Расчёт вероятностей
+probabilities = poisson.pmf(x, mu=lam)
 
-# Число, соответствующее номеру шага
-result = min_value + (step_number * step)
+mu = 0
+sigma = 100
 
-print((15 - min_value) / step)
+# Расчёт вероятностей
+#probabilities = norma.pdf(x, loc=mu, scale=sigma)
+
+print(probabilities)
