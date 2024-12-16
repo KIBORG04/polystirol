@@ -72,15 +72,3 @@ def GetProbabilities(num, method='linear-decrease'):
 
 def GetAllMethods():
     return Methods.keys()
-
-probbbs = GetProbabilities(100, 'pareto xm=20% k=3')
-print(probbbs)
-
-# probbbs = np.array([0.7, 0.1, 0.05, 0.05, 0.1])
-# print(probbbs)
-# probbbs = np.delete(probbbs, 0)
-# probbbs = probbbs / sum(probbbs)
-# print(probbbs)
-# probbbs = np.delete(probbbs, 3)
-# probbbs = probbbs / sum(probbbs)
-# print(probbbs)
